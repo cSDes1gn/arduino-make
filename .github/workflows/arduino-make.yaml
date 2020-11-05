@@ -20,8 +20,8 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt install shellcheck
-        python -m pip install --upgrade pip
-        python -m pip install cpplint
+        python3 -m pip install --upgrade pip
+        python3 -m pip install cpplint
     - name: cpplint
       run: |
         # run against all h, cpp and ino files in the src/ and include/ directories

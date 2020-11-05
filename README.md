@@ -1,9 +1,7 @@
 # Arduino Make
-![Arduino Make](https://github.com/cSDes1gn/arduino-make/workflows/Arduino%20Make/badge.svg?branch=master)
+[![Arduino Make](https://github.com/cSDes1gn/arduino-make/workflows/Arduino%20Make/badge.svg?branch=master)]((https://github.com/cSDes1gn/arduino-make/actions))
 
-## Navigation
 - [Arduino Make](#arduino-make)
-  - [Navigation](#navigation)
   - [Docs](#docs)
   - [Quickstart](#quickstart)
   - [License](#license)
