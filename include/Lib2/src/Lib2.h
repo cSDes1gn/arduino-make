@@ -15,8 +15,8 @@
  * Contact: <Email>
  */
 
-#ifndef LIBRARIES_LIB2_SRC_LIB2_H_
-#define LIBRARIES_LIB2_SRC_LIB2_H_
+#ifndef INCLUDE_LIB2_SRC_LIB2_H_
+#define INCLUDE_LIB2_SRC_LIB2_H_
 #include <Arduino.h>
 class Lib2 {
  public:
@@ -26,4 +26,4 @@ class Lib2 {
  private:
   String msg;
 };
-#endif  // LIBRARIES_LIB2_SRC_LIB2_H_
+#endif  // INCLUDE_LIB2_SRC_LIB2_H_
