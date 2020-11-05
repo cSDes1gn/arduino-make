@@ -1,21 +1,22 @@
 // -*- lsst-c++ -*-
 /**
- * LEAP Systems
+ * Seven Segment Display
+ * 
  * See COPYRIGHT file at the top of the source tree.
  * Copyright © 2020 LEAP. All Rights Reserved.
  * 
- * @file segment.h
+ * @file Segment.h
  *
  * @brief Modified seven segment driver solution for KEM 5621 BSR
  *
  * @ingroup Segment
  *
- * @author Christian Sargusingh
- * Contact: christian@leapsystems.online
+ * @author <Name>
+ * Contact: <Email>
  */
 
-#ifndef FIRMWARE_INCLUDE_SEGMENT_SRC_SEGMENT_H_
-#define FIRMWARE_INCLUDE_SEGMENT_SRC_SEGMENT_H_
+#ifndef SEGMENT_SRC_SEGMENT_H_
+#define SEGMENT_SRC_SEGMENT_H_
 #include <Arduino.h>
 class Segment {
  public:
@@ -26,4 +27,4 @@ class Segment {
  private:
   int pins[7];
 };
-#endif  // FIRMWARE_INCLUDE_SEGMENT_SRC_SEGMENT_H_
+#endif  // SEGMENT_SRC_SEGMENT_H_

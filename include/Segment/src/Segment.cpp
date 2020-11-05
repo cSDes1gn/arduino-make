@@ -1,8 +1,9 @@
 // -*- lsst-c++ -*-
 /**
- * LEAP Systems
+ * Seven Segment Display
+ * 
  * See COPYRIGHT file at the top of the source tree.
- * Copyright © 2020 LEAP. All Rights Reserved.
+ * Copyright [year] <Copyright Owner>
 */
 
 #include <Arduino.h>

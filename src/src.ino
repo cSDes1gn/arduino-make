@@ -1,13 +1,15 @@
 // -*- lsst-c++ -*-
 /**
- * Sample src.ino
+ * Sample src.ino file (entry point)
  * 
  * @file src.ino
  *
  * @brief Sample source file
  *
- * @author Christian Sargusingh
- * Contact: christian@leapsystems.online
+ * @author <Name>
+ * Contact: <Email>
+ * 
+ * Copyright [year] <Copyright Owner>
  */
 #include <SoftwareSerial.h>
 
