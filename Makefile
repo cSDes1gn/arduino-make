@@ -13,23 +13,20 @@ OKBLUE=\033[94m
 UNDERLINE=\033[4m
 NC=\033[0m
 
-# User Env flags
-# include files
-INCLUDE_DIR=include
-# src files
-SRC_DIR=src
+# Source user env flags
+include .env
+export $(shell sed 's/=.*//' .env)
+
 # build directory
-BUILD_DIR=src/build/
-# build core (ref arduino-cli)
-CORE=arduino:avr:uno
-LINT_EXT=ino,h,cpp
+BUILD_DIR=${SOURCE_PATH}/build/
+
 # scrape serial port from /dev
 # TODO: scrape using `arduino-cli board list` (requires FBQN resolvers)
 TTY := $$(ls /dev/tty.usbserial*)
 kill_serial := $$(kill -9 $$(lsof ${TTY} | awk 'NR>1 {print $$2}'))
 # extract all local include libraries and send to the compiler
 local_libs := $$(libs=() \
-	&& for dir in ${INCLUDE_DIR}/*/; do libs+=($$PWD/$$dir); done \
+	&& for dir in ${LD_PATH}/*/; do libs+=($$PWD/$$dir); done \
 	&& printf -v joined '%s,' "$${libs[@]}" \
 	&& echo $${joined%,})
 
@@ -60,8 +57,8 @@ setup: ## configure arduino-cli and install cpplinter
 .PHONY: lint
 lint: ## lint with cpplint for Google cpp guidelines and code styling
 	@printf "${OKBLUE}Linting filesystems ... \n\tExtensions:\t${OKGREEN}${LINT_EXT} \n${OKBLUE}\
-		Source dir:\t${OKGREEN}${SRC_DIR}\n\t${OKBLUE}Include dir:\t${OKGREEN}${INCLUDE_DIR}${NC}\n"
-	@cpplint --recursive --extensions=${LINT_EXT} ${SRC_DIR} ${INCLUDE_DIR}
+		Source dir:\t${OKGREEN}${SOURCE_PATH}\n\t${OKBLUE}Include dir:\t${OKGREEN}${LD_PATH}${NC}\n"
+	@cpplint --recursive --extensions=${LINT_EXT} ${SOURCE_PATH} ${LD_PATH}
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: compile
@@ -69,7 +66,7 @@ compile: ## build arduino artefacts
 	@printf "${OKBLUE}Compiling .ino into ${BUILD_DIR}${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
 		--libraries $(call local_libs)\
-		--fqbn ${CORE} ${SRC_DIR}
+		--fqbn ${CORE} ${SOURCE_PATH}
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: flash
@@ -78,7 +75,7 @@ flash: ## flash arduino build artefacts to board
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
 		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
-	@arduino-cli upload -v -p ${TTY} --fqbn ${CORE} ${SRC_DIR};
+	@arduino-cli upload -v -p ${TTY} --fqbn ${CORE} ${SOURCE_PATH};
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: clean
