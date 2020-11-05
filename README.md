@@ -2,11 +2,9 @@
 ![Arduino Make](https://github.com/cSDes1gn/arduino-make/workflows/Arduino%20Make/badge.svg?branch=master)
 
 ## Navigation
-- [Arduino Make](#arduino-make)
-  - [Navigation](#navigation)
-  - [Docs](#docs)
-  - [Quickstart](#quickstart)
-  - [License](#license)
+1. [Docs](#Docs)
+2. [Quickstart](#Quickstart)
+3. [License](#License)
 
 ## Docs
 
