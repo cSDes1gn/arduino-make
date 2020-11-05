@@ -21,11 +21,6 @@ export $(shell sed 's/=.*//' .env)
 # TODO: scrape using `arduino-cli board list` (requires FBQN resolvers)
 TTY = $$(ls /dev/tty.usbserial*)
 kill_serial := $$(kill -9 $$(lsof ${TTY} | awk 'NR>1 {print $$2}'))
-# extract all local include libraries and send to the compiler
-local_libs := $$(libs=() \
-	&& for dir in $${LD_PATH}/*/; do libs+=($$PWD/$$dir); done \
-	&& printf -v joined '%s,' "$${libs[@]}" \
-	&& echo $${joined%,})
 
 .PHONY: help
 help:
@@ -62,7 +57,7 @@ lint: ## lint with cpplint for Google cpp guidelines and code styling
 compile: ## build arduino artefacts
 	@printf "${OKBLUE}Compiling .ino into ${OKGREEN}${BUILD_PATH}${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
-		--libraries $(call local_libs)\
+		--libraries ${PWD}/${LD_PATH}\
 		--fqbn ${CORE} ${SOURCE_PATH}\
 		--output-dir ${BUILD_PATH}
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
