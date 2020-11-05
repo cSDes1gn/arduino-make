@@ -37,13 +37,14 @@ help:
 all: lint compile flash
 
 .PHONY: setup
-setup: ## configure arduino-cli and install cpplinter
+setup: ## configure arduino-cli and install python cpplinter
 	@arduino-cli config init;
 	@arduino-cli core update-index;
 	@arduino-cli core install arduino:avr;
 	@arduino-cli core upgrade;
 	@arduino-cli core list;
 	@arduino-cli board listall;
+	@python3 -m pip install --upgrade pip
 	@python3 -m pip install cpplint
 
 .PHONY: lint
@@ -58,17 +59,17 @@ compile: ## build arduino artefacts
 	@printf "${OKBLUE}Compiling .ino into ${OKGREEN}${BUILD_PATH}${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
 		--libraries ${PWD}/${LD_PATH}\
-		--fqbn ${CORE} ${SOURCE_PATH}\
+		--fqbn ${FBQN} ${SOURCE_PATH}\
 		--output-dir ${BUILD_PATH}
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: flash
 flash: ## flash arduino build artefacts to board
-	@printf "${OKBLUE}Flashing ${BUILD_PATH}/${CORE} to ${TTY}${NC}\n"
+	@printf "${OKBLUE}Flashing ${BUILD_PATH} to ${TTY}${NC}\n"
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
 		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
-	@arduino-cli upload -v -p ${TTY} --fqbn ${CORE} ${SOURCE_PATH} --input-dir ${BUILD_PATH};
+	@arduino-cli upload -v -p ${TTY} --fqbn ${FBQN} ${SOURCE_PATH} --input-dir ${BUILD_PATH};
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: clean
