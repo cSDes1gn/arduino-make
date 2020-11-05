@@ -12,7 +12,7 @@
             "eamodio.gitlens",
             "ms-vscode.hexeditor",
             "mikestead.dotenv"
-		]
+        ]
     },
     "settings": {
         "workbench.activityBar.visible": true,
