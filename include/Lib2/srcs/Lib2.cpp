@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "Lib2.h"
 
-Lib2::Lib2(boolean value) {
-    this->value = value;
+Lib2::Lib2(String msg) {
+    this->msg = msg;
 }
 
-void Lib2::echo() {
-    return this->value
+String Lib2::echo() {
+    return this->msg;
 }

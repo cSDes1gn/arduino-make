@@ -20,10 +20,10 @@
 #include <Arduino.h>
 class Lib1 {
  public:
-  explicit Lib1(int num);
-  void echo();
+  explicit Lib1(String msg);
+  String echo();
 
  private:
-  int num;
+  String msg;
 };
 #endif  // LIB1_SRC_LIB1_H_

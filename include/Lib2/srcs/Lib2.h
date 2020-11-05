@@ -20,10 +20,10 @@
 #include <Arduino.h>
 class Lib2 {
  public:
-  explicit Lib2(boolean value);
-  void echo();
+  explicit Lib2(String msg);
+  String echo();
 
  private:
-  boolean value;
+  String msg;
 };
 #endif  // LIB2_SRC_LIB2_H_

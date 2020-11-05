@@ -9,10 +9,10 @@
 #include <Arduino.h>
 #include "Lib1.h"
 
-Lib1::Lib1(int num) {
-    this->num = num;
+Lib1::Lib1(String msg) {
+    this->msg = msg;
 }
 
-void Lib1::echo() {
-    return this->num
+String Lib1::echo() {
+    return this->msg;
 }
