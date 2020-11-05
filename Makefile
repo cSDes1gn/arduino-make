@@ -56,7 +56,7 @@ lint: ## lint with cpplint for Google cpp guidelines and code styling
 
 .PHONY: compile
 compile: ## build arduino artefacts
-	@printf "${OKBLUE}Compiling .ino into ${OKGREEN}${BUILD_PATH}${NC}\n"
+	@printf "${OKBLUE}Compiling ${OKGREEN}${SOURCE_PATH}/ ${OKBLUE}into ${OKGREEN}${BUILD_PATH}/${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
 		--libraries ${PWD}/${LD_PATH}\
 		--fqbn ${FBQN} ${SOURCE_PATH}\
