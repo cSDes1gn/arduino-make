@@ -1,8 +1,8 @@
 // -*- lsst-c++ -*-
 /**
- * @defgroup Segment Seven Segment Display Library
+ * @defgroup Lib2
  *
- * @brief Seven segment driver library for KEM 5621 BSR module
+ * @brief This is a sample Library
  * 
  * Copyright © [year] <Copyright Owner>.
  */
