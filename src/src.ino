@@ -9,9 +9,11 @@
  * @author <Name>
  * Contact: <Email>
  * 
- * Copyright [year] <Copyright Owner>
+ * Copyright © [year] <Copyright Owner>.
  */
 #include <SoftwareSerial.h>
+#include <Lib1.h>
+#include <Lib2.h>
 
 void setup() {
     Serial.begin(9600);
