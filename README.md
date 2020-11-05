@@ -10,6 +10,5 @@
 
 ## Quickstart
 
-
 ## License
 [MIT License](LICENSE)
