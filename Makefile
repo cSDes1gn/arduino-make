@@ -17,16 +17,13 @@ NC=\033[0m
 include .env
 export $(shell sed 's/=.*//' .env)
 
-# build directory
-BUILD_DIR=${SOURCE_PATH}/build/
-
 # scrape serial port from /dev
 # TODO: scrape using `arduino-cli board list` (requires FBQN resolvers)
-TTY := $$(ls /dev/tty.usbserial*)
+TTY = $$(ls /dev/tty.usbserial*)
 kill_serial := $$(kill -9 $$(lsof ${TTY} | awk 'NR>1 {print $$2}'))
 # extract all local include libraries and send to the compiler
 local_libs := $$(libs=() \
-	&& for dir in ${LD_PATH}/*/; do libs+=($$PWD/$$dir); done \
+	&& for dir in $${LD_PATH}/*/; do libs+=($$PWD/$$dir); done \
 	&& printf -v joined '%s,' "$${libs[@]}" \
 	&& echo $${joined%,})
 
@@ -63,25 +60,26 @@ lint: ## lint with cpplint for Google cpp guidelines and code styling
 
 .PHONY: compile
 compile: ## build arduino artefacts
-	@printf "${OKBLUE}Compiling .ino into ${BUILD_DIR}${NC}\n"
+	@printf "${OKBLUE}Compiling .ino into ${OKGREEN}${BUILD_PATH}${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
 		--libraries $(call local_libs)\
-		--fqbn ${CORE} ${SOURCE_PATH}
+		--fqbn ${CORE} ${SOURCE_PATH}\
+		--output-dir ${BUILD_PATH}
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: flash
 flash: ## flash arduino build artefacts to board
-	@printf "${OKBLUE}Flashing ${BUILD_DIR}${CORE} to ${TTY}${NC}\n"
+	@printf "${OKBLUE}Flashing ${BUILD_PATH}/${CORE} to ${TTY}${NC}\n"
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
 		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
-	@arduino-cli upload -v -p ${TTY} --fqbn ${CORE} ${SOURCE_PATH};
+	@arduino-cli upload -v -p ${TTY} --fqbn ${CORE} ${SOURCE_PATH} --input-dir ${BUILD_PATH};
 	@printf "${OKGREEN} ✓ ${NC} Complete\n"
 
 .PHONY: clean
 clean: ## clear build artefacts and close serial monitor
-	@printf "${OKBLUE}Cleaning build artefacts: ${BUILD_DIR}${NC}\n";
-	@rm -rfv ${BUILD_DIR};
+	@printf "${OKBLUE}Cleaning build artefacts: ${BUILD_PATH}${NC}\n";
+	@rm -rfv ${BUILD_PATH};
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
 		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
