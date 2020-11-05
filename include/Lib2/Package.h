@@ -6,6 +6,6 @@
  * 
  * Copyright © [year] <Copyright Owner>.
  */
-#ifndef LIB2_PACKAGE_H_
-#define LIB2_PACKAGE_H_
-#endif  // LIB2_PACKAGE_H_
+#ifndef INCLUDE_LIB2_PACKAGE_H_
+#define INCLUDE_LIB2_PACKAGE_H_
+#endif  // INCLUDE_LIB2_PACKAGE_H_
