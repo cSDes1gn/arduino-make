@@ -1,10 +1,10 @@
 // -*- lsst-c++ -*-
 /**
- * @defgroup PackageName
+ * @defgroup Template
  *
  * @brief Template repository for arduino projects
  * 
- * Copyright [year] <name>.
+ * Copyright [year] <Copyright Owner>
  */
 #ifndef PACKAGE_H_
 #define PACKAGE_H_
