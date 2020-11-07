@@ -6,10 +6,10 @@
 # Modified: 2020-11
 # Copyright © 2020 Christian Sargusingh
 
-OKGREEN=\033[92m
+OKG=\033[92m
 # WARNING=\033[93m
-# FAIL=\033[91m
-OKBLUE=\033[94m
+FAIL=\033[91m
+OKB=\033[94m
 UNDERLINE=\033[4m
 NC=\033[0m
 
@@ -38,48 +38,55 @@ all: lint compile flash
 
 .PHONY: setup
 setup: ## configure arduino-cli and install python cpplinter
+	@printf "${OKB}Verifying arduino-cli installation ...  ${NC}\n"
+	@if ! command -v ardino-cli &> /dev/null; then\
+		printf "${FAIL} ✗ ${NC} arduino-cli command not found. If the arduino-cli tool is installed check to ensure it exists in your PATH\n"; fi;\
+		exit 1;
+	@printf "${OKB}Configuring arduino-make environment ...  ${NC}\n"
 	@arduino-cli config init;
 	@arduino-cli core update-index;
-	@arduino-cli core install arduino:avr;
+	@arduino-cli core install ${CORE};
 	@arduino-cli core upgrade;
-	@arduino-cli core list;
-	@arduino-cli board listall;
+	@printf "\nInstalling arduino-cli requirements.\n"
+	@xargs -P1 arduino-cli lib install < requirements.txt;
 	@python3 -m pip install --upgrade pip
 	@python3 -m pip install cpplint
+	@printf "${OKG} ✓ ${NC} Build environment configured.\n"
+	
 
 .PHONY: lint
 lint: ## lint with cpplint for Google cpp guidelines and code styling
-	@printf "${OKBLUE}Linting filesystems ... \n\tExtensions:\t${OKGREEN}${LINT_EXT} \n${OKBLUE}\
-		Source dir:\t${OKGREEN}${SOURCE_PATH}\n\t${OKBLUE}Include dir:\t${OKGREEN}${LD_PATH}${NC}\n"
+	@printf "${OKB}Linting filesystems ... \n\tExtensions:\t${OKG}${LINT_EXT} \n${OKB}\
+		Source dir:\t${OKG}${SOURCE_PATH}\n\t${OKB}Include dir:\t${OKG}${LD_PATH}${NC}\n"
 	@cpplint --recursive --extensions=${LINT_EXT} ${SOURCE_PATH} ${LD_PATH}
-	@printf "${OKGREEN} ✓ ${NC} Complete\n"
+	@printf "${OKG} ✓ ${NC} Complete\n"
 
 .PHONY: compile
 compile: ## build arduino artefacts
-	@printf "${OKBLUE}Compiling ${OKGREEN}${SOURCE_PATH}/ ${OKBLUE}into ${OKGREEN}${BUILD_PATH}/${NC}\n"
+	@printf "${OKB}Compiling ${OKG}${SOURCE_PATH}/ ${OKB}into ${OKG}${BUILD_PATH}/${NC}\n"
 	@arduino-cli compile -v --warnings "all" \
 		--libraries ${PWD}/${LD_PATH}\
 		--fqbn ${FBQN} ${SOURCE_PATH}\
 		--output-dir ${BUILD_PATH}
-	@printf "${OKGREEN} ✓ ${NC} Complete\n"
+	@printf "${OKG} ✓ ${NC} Complete\n"
 
 .PHONY: flash
 flash: ## flash arduino build artefacts to board
-	@printf "${OKBLUE}Flashing ${BUILD_PATH} to ${TTY}${NC}\n"
+	@printf "${OKB}Flashing ${BUILD_PATH} to ${TTY}${NC}\n"
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
-		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
+		printf "${OKB}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
 	@arduino-cli upload -v -p ${TTY} --fqbn ${FBQN} ${SOURCE_PATH} --input-dir ${BUILD_PATH};
-	@printf "${OKGREEN} ✓ ${NC} Complete\n"
+	@printf "${OKG} ✓ ${NC} Complete\n"
 
 .PHONY: clean
 clean: ## clear build artefacts and close serial monitor
-	@printf "${OKBLUE}Cleaning build artefacts: ${BUILD_PATH}${NC}\n";
+	@printf "${OKB}Cleaning build artefacts: ${BUILD_PATH}${NC}\n";
 	@rm -rfv ${BUILD_PATH};
 	@if [[ -n "$$(lsof ${TTY})" ]]; then \
-		printf "${OKBLUE}Closing serial montior @ ${TTY}${NC}\n" \
+		printf "${OKB}Closing serial montior @ ${TTY}${NC}\n" \
 		$(call kill_serial); fi;
-	@printf "${OKGREEN} ✓ ${NC} Complete\n"
+	@printf "${OKG} ✓ ${NC} Complete\n"
 
 .PHONY: monitor
 monitor: ## Open serial port using tty. Ctrl-a + d to exit screen
