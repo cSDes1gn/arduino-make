@@ -1,13 +1,14 @@
 # Arduino Make
 [![Arduino Make](https://github.com/cSDes1gn/arduino-make/workflows/Arduino%20Make/badge.svg?branch=master)](https://github.com/cSDes1gn/arduino-make/actions)
 
+![img](/docs/img/ArduinoCommunityLogo.png)
+
 - [Arduino Make](#arduino-make)
   - [Quickstart](#quickstart)
     - [Vscode](#vscode)
   - [License](#license)
 
-Arduino Make is a repository template for building large scale arduino projects. It attempts to homogenize best practices for C/C++ development in accordance with Google Style C++ and DOxygen while meeting the requirments for `arduino-cli` runtimes.
-
+Arduino Make is a repository template for building large scale arduino projects. It attempts to homogenize best practices for C/C++ development in accordance with [Google Style C++](https://google.github.io/styleguide/cppguide.html) and [DOxygen](https://www.doxygen.nl/manual/index.html) while meeting the requirements for `arduino-cli` runtimes. The environment is controlled by an easy to use Makefile with a built-in linter to enforce good coding habits and consistent and flexible arduino project design.
 
 ## Quickstart
 1. Preinstallations and environment configuration
