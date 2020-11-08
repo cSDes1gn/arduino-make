@@ -40,8 +40,8 @@ all: lint compile flash
 setup: ## configure arduino-cli and install python cpplinter
 	@printf "${OKB}Verifying arduino-cli installation ...  ${NC}\n"
 	@if ! command -v arduino-cli &> /dev/null; then\
-		printf "${FAIL} ✗ ${NC} arduino-cli command not found. If the arduino-cli tool is installed check to ensure it exists in your PATH\n"; fi;\
-		exit 1;
+		printf "${FAIL} ✗ ${NC} arduino-cli command not found. If the arduino-cli tool is installed check to ensure it exists in your PATH\n";\
+		exit 1; fi;
 	@printf "${OKB}Configuring arduino-make environment ...  ${NC}\n"
 	@arduino-cli config init;
 	@arduino-cli core update-index;
