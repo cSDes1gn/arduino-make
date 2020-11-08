@@ -1,5 +1,18 @@
 # Documentation
 
+## Environment Configuration
+In the workspace root there is a `.env` file that holds config settings for the project Makefile
+
+### $SOURCE_PATH
+
+### $LD_PATH
+
+### $BOARD
+
+### $CORE
+
+### $LINT_EXT
+
 ## Vscode
 This section is only written for projects using the `avr-gcc` compiler for their projects. 
 
