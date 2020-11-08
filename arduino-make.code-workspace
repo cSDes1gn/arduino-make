@@ -7,9 +7,7 @@
     "extensions": {
         "recommendations": [
             "ms-vscode.cpptools",
-            "yzhang.markdown-all-in-one",
             "visualstudioexptteam.vscodeintellicode",
-            "eamodio.gitlens",
             "ms-vscode.hexeditor",
             "mikestead.dotenv"
         ]
