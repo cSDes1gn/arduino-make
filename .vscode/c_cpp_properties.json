@@ -9,7 +9,8 @@
         {
             "name": "Mac",
             "intelliSenseMode": "gcc-x64",
-            "compilerPath": "/usr/local/bin/gcc-10",
+            // set compile path to avr-gcc
+            "compilerPath": "/Users/${USER}/Library/Arduino15/packages/arduino/tools/avr-gcc/7.3.0-atmel3.6.1-arduino7/bin/avr-gcc",
             "cStandard": "gnu17",
             "cppStandard": "gnu++14",
             "includePath": [
