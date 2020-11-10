@@ -16,6 +16,7 @@
             "includePath": [
                 //project includes
                 "${myDefaultIncludePath}",
+                "/Users/${USER}/Documents/Arduino/libraries",
                 // built-ins
                 "/Users/${USER}/Library/Arduino15/packages/arduino/hardware/avr/1.8.3/libraries/SPI/src",
                 "/Users/${USER}/Library/Arduino15/packages/arduino/hardware/avr/1.8.3/libraries/SoftwareSerial/src",
@@ -43,6 +44,7 @@
             "browse": {
               "path": [
                 "${workspaceFolder}",
+                "/Users/${USER}/Documents/Arduino/libraries",
                 "/Users/${USER}/Library/Arduino15/packages/arduino/hardware/avr/1.8.3/libraries",
                 "/Users/${USER}/Library/Arduino15/packages/arduino/hardware/avr/1.8.3/cores/arduino"
               ],
