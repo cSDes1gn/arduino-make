@@ -11,20 +11,23 @@
  * 
  * Copyright © [year] <Copyright Owner>.
  */
-#include <SoftwareSerial.h>
+// #include <SoftwareSerial.h>
 #include <Lib1.h>
 #include <Lib2.h>
+#include <Arduino.h>
 
 Lib1 lb1("Hello from Lib1!");
 Lib2 lb2("Hello from Lib2!");
 
 void setup() {
-    Serial.begin(9600);
+  // put your setup code here, to run once:
+  pinMode(PC13, OUTPUT);
 }
 
 void loop() {
-    Serial.println("Hello World!");
-    Serial.println(lb1.echo());
-    Serial.println(lb2.echo());
-    delay(1000);
+  // put your main code here, to run repeatedly:
+  digitalWrite(PC13, HIGH);
+  delay(1000);
+  digitalWrite(PC13, LOW);
+  delay(1000);
 }
