@@ -24,7 +24,7 @@
         "window.zoomLevel": 0,
         "C_Cpp.intelliSenseEngine":"Tag Parser",
         "cpplint.root": "${workspaceFolder}",
-        "cpplint.cpplintPath":"/usr/local/Cellar/python@3.8/3.8.6/Frameworks/Python.framework/Versions/3.8/bin/cpplint",
+        "cpplint.cpplintPath":"",
         "cpplint.extensions": [
             "cpp",
             "c",
